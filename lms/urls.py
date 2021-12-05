@@ -1,5 +1,5 @@
-"""lms URL Configuration
 
+"""lms URL Configuration
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
 Examples:
@@ -16,17 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from students.views import index, get_students
-
-from groups.views import index_group
-
-from teachers.views import index_teachers
+from groups.views import get_groups
+from students.views import index, get_students, create_student, update_student
+from teachers.views import get_teachers
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
-    path('students/', get_students, name='get_students'),
-    path('groups/', index_group, name='index_group'),
-    path('teachers/', index_teachers, name='index_teachers')
-
+    path('students/', get_students, name='get_students'),               #R
+    path('students/create/', create_student, name='create_student'), #C
+    path('teachers/', get_teachers, name='get_teachers'),
+    path('students/update/<int:pk>/', update_student, name='update_student'),
+    path('groups/', get_groups, name='get_groups')
 ]

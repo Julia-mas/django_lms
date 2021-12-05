@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LMS - {% block title %}{% endblock %}</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td><a href="/">Home</a></td>
+            <td><a href="/students/">List students</a></td>
+            <td><a href="/students/create/">Create students</a></td>
+        </tr>
+    </table>
+    <br></br>
+    {% block content %}
+</body>
+</html>
