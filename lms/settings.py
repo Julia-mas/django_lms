@@ -131,3 +131,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # if DEBUG:
 #     SHELL_PLUS_PRINT_SQL = True
 #     SHELL_PLUS = "ipython"
+
