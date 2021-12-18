@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LMS - {% block title %}{% endblock %}</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td><a href="/g/">Home</a></td>
+            <td><a href="/groups/">List groups</a></td>
+            <td><a href="/groups/create/">Create group</a></td>
+        </tr>
+    </table>
+    <br><br>
+    {% block content %}
+
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,22 @@
+{% extends 'groups/base.html' %}
+
+{% block title %}
+    Groups list
+{% endblock %}
+
+{% block content %}
+    <form method="get">
+        <label for="gname">Groups name:</label>
+        <input type="text" id="gname" name="groups_name"></br></br>
+        <label for="gnat">Groups nationality:</label>
+        <input type="text" id="gnat" name="groups_nationality"></br></br>
+        <label for="language">Groups language:</label>
+        <input type="text" name="groups_language"></br></br>
+        <label for="members">Members quantity:</label>
+        <input type="number" name="members_qty"></br></br>
+        <input type="submit" value="Submit">
+    </form>
+    {% for group in groups %}
+        <a href="update/{{ group.id }}/">Edit</a>&nbsp;&nbsp;{{ group }}<br>
+    {% endfor %}
+{% endblock %}
