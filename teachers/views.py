@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from teachers.forms import TeacherCreateForm
 from teachers.models import Teachers
-
+from teachers.forms import TeachersFilter
 
 from webargs import fields
 from webargs.djangoparser import use_args
@@ -17,20 +17,25 @@ from webargs.djangoparser import use_args
         'last_name': fields.Str(required=False),
         'subject': fields.Str(required=False),
         'seniority_years': fields.Int(required=False),
-        'phone_number': fields.Int(required=False)
     },
     location='query'
 )
 def get_teachers(request, args):
     teachers = Teachers.objects.all()
+
     for key, value in args.items():
         if value:
             teachers = teachers.filter(**{key: value})
 
+    filter_teachers = TeachersFilter(data=request.GET, queryset=teachers)
+
     return render(
         request=request,
         template_name='teachers/list.html',
-        context={'test': 'Hello World!', 'teachers': teachers}
+        context={'test': 'Hello World!',
+                 'teachers': teachers,
+                 'filter_teachers': filter_teachers
+                 }
     )
 
 

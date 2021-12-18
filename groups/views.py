@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from groups.forms import GroupCreateForm
 from groups.models import Groups
+from groups.forms import GroupsFilter
 
 from webargs import fields
 from webargs.djangoparser import use_args
@@ -26,10 +27,12 @@ def get_groups(request, args):
         if value:
             groups = groups.filter(**{key: value})
 
+    filter_groups = GroupsFilter(data=request.GET, queryset=groups)
+
     return render(
         request=request,
         template_name='groups/list.html',
-        context={'groups': groups}
+        context={'groups': groups, 'filter_groups': filter_groups}
     )
 
 

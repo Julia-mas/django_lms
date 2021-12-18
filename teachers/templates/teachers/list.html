@@ -1,51 +1,44 @@
 {% extends 'base.html' %}
 
+{%  load crispy_forms_tags %}
+
 {% block title %}
     Teachers list
 {% endblock %}
-
-{% block custom_css %}
-table, th, td {
-  border: 1px solid black;
-  text-align: left;
-  padding: 8px;
-  border-collapse: collapse;
-}
-tr:nth-child(even) {
-  background-color: rgba(150, 212, 212, 0.4);
-}
-
-th:nth-child(even),td:nth-child(even) {
-  background-color: rgba(150, 212, 212, 0.4);
-}
-{% endblock %}
-
 {% block content %}
-    <form method="get">
-        <label for="fname">First name:</label>
-        <input type="text" id="fname" name="first_name"><br><br>
-        <label for="lname">Last name:</label>
-        <input type="text" id="lname" name="last_name"><br><br>
-        <label for="subject">Subject:</label>
-        <input type="text" name="subject"><br><br>
-        <label for="years">Seniority years:</label>
-        <input type="number" name="seniority_years"><br><br>
-        <label for="phone">Phone number:</label>
-        <input type="number" name="phone_number"><br><br>
-        <input type="submit" value="Search">
-    </form>
-    <table style="width:98%">
-        <tr>
-            <th></th>
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button collapsed" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                        aria-expanded="true" aria-controls="collapseOne">
+                    Search
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse"
+                 aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <form method="get">
+                        {{ filter_teachers.form | crispy }}
+                        <input class="btn btn-outline-success" type="submit" value="Search">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p class="mt-2"><strong>Count of teachers: {{ filter_teachers.qs.count }}</strong></p>
+    <table class="table table-light table-hover">
+        <tr class="table-active">
+            <th scope="row">№</th>
             <th>First name</th>
             <th>Last name</th>
             <th>Subject</th>
             <th>Seniority years</th>
             <th>Phone number</th>
-            <th>✐</th>
-            <th>🗑</th>
+            <th><i class="bi bi-pen"></i></th>
+            <th><i class="bi bi-trash-fill"></i></th>
         </tr>
-    {% for teacher in teachers %}
+    {% for teacher in filter_teachers.qs %}
         <tr>
             <td>{{ forloop.counter }}</td>
             <td>{{ teacher.first_name }}</td>
@@ -57,4 +50,5 @@ th:nth-child(even),td:nth-child(even) {
             <td><a href="{% url 'teachers:delete' teacher.id %}">Delete</a></td>
         </tr>
     {% endfor %}
+    </table>
 {% endblock %}

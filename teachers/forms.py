@@ -1,4 +1,5 @@
 from django import forms
+from django_filters import FilterSet
 
 from .models import Teachers
 from .validators import normalize_phone
@@ -31,3 +32,13 @@ class TeacherCreateForm(forms.ModelForm):
     def clean_last_name(self):
         last_name = self.cleaned_data['last_name']
         return self.normalize_name(last_name)
+
+
+class TeachersFilter(FilterSet):
+    class Meta:
+        model = Teachers
+        fields = {
+            'seniority_years': ['lt', 'gt'],
+            'first_name': ['exact', 'icontains'],
+            'last_name': ['exact', 'startswith'],
+        }

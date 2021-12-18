@@ -1,65 +1,86 @@
 {% extends 'base.html' %}
 
+{%  load crispy_forms_tags %}
+
 {% block title %}
     Students list
 {% endblock %}
 
-{% block custom_css %}
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-{% endblock %}
+{#{% block custom_css %}#}
+{#table {#}
+{#  font-family: arial, sans-serif;#}
+{#  border-collapse: collapse;#}
+{#  width: 100%;#}
+{#}#}
+{##}
+{#td, th {#}
+{#  border: 1px solid #dddddd;#}
+{#  text-align: left;#}
+{#  padding: 8px;#}
+{#}#}
+{##}
+{#tr:nth-child(even) {#}
+{#  background-color: #dddddd;#}
+{#}#}
+{#{% endblock %}#}
 
 {% block content %}
-    <form method="get">
-        <label for="fname">First name:</label>
-        <input type="text" id="fname" name="first_name"><br><br>
-
-        <label for="lname">Last name:</label>
-        <input type="text" id="lname" name="last_name"><br><br>
-
-        <label for="age">Age:</label>
-        <input type="number" name="age"><br><br>
-
-        <input type="submit" value="Search">
-    </form>
-    <p><strong>Count of students: {{ students.count }}</strong></p>
-    <table>
-        <tr>
-            <th></th>
-            <th>First name</th>
-            <th>Last name</th>
-            <th>Age</th>
-            <th>Phone</th>
-            <th>enroll_date</th>
-            <th>graduate_date</th>
-            <th>✐</th>
-            <th>🗑</th>
-        </tr>
-    {% for student in students %}
-        <tr>
-            <td>{{ forloop.counter }}</td>
-            <td>{{ student.first_name }}</td>
-            <td>{{ student.last_name }}</td>
-            <td>{{ student.age }}</td>
-            <td>{{ student.phone_number }}</td>
-            <td>{{ student.enroll_date }}</td>
-            <td>{{ student.graduate_date }}</td>
-            <td><a href="{% url 'students:update' student.id %}">Edit</a></td>
-            <td><a href="{% url 'students:delete' student.id %}">Delete</a></td>
-        </tr>
-    {% endfor %}
-    </table>
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button collapsed" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                        aria-expanded="true" aria-controls="collapseOne">
+                    Search
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse"
+                 aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <form method="get">
+                        {{ filter_students.form | crispy }}
+                        <input class="btn btn-outline-success" type="submit" value="Search">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{#    <p><strong>Count of students: {{ students.count }}</strong></p>#}
+    <p class="mt-2"><strong>Count of students: {{ filter_students.qs.count }}</strong></p>
+{#    <table class="table table-striped table-hover">#}
+{#        <tr>#}
+{#            <th></th>#}
+{#            <th>First name</th>#}
+{#            <th>Last name</th>#}
+{#            <th>Age</th>#}
+{#            <th><i class="bi bi-telephone"></i></th>#}
+{#            <th>Enroll date</th>#}
+{#            <th>Graduate date</th>#}
+{#            <th>Group</th>#}
+{#            <th><i class="bi bi-pencil"></i></th>#}
+{#            <th><i class="bi bi-trash"></i></th>#}
+{#        </tr>#}
+{#    {% for student in students %}#}
+{#    {% for student in filter_students.qs %}#}
+{#        <tr>#}
+{#            <td>{{ forloop.counter }}</td>#}
+{#            <td>{{ student.first_name }}</td>#}
+{#            <td>{{ student.last_name }}</td>#}
+{#            <td>{{ student.age }}</td>#}
+{#            <td>#}
+{#                {% if student.phone_number is not None %}#}
+{#                    {{ student.phone_number }}#}
+{#                {% endif %}#}
+{#            </td>#}
+{#            <td>{{ student.enroll_date }}</td>#}
+{#            <td>{{ student.graduate_date }}</td>#}
+{#            <td>{{ student.group }}</td>#}
+{#            <td><a href="{% url 'students:update' student.id %}">Edit</a></td>#}
+{#            <td><a href="{% url 'students:delete' student.id %}">Delete</a></td>#}
+{#        </tr>#}
+{#    {% endfor %}#}
+{#    </table>#}
+    {% with list_object=filter_students.qs %}
+        {% include 'includes/students_list_table.html' %}
+    {% endwith %}
 {% endblock %}
