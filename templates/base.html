@@ -3,16 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>LMS - {% block title %}{% endblock %}</title>
+    <style>{% block custom_css %}{% endblock %}</style>
 </head>
 <body>
     <table>
         <tr>
             <td><a href="/">Home</a></td>
-            <td><a href="/students/">List students</a></td>
-            <td><a href="/students/create/">Create students</a></td>
+            <td><a href="{% url 'students:list' %}">List students</a></td>
+            <td><a href="{% url 'students:create' %}">Create student</a></td>
+            <td><a href="{% url 'teachers:list' %}">List teachers</a></td>
+            <td><a href="{% url 'teachers:create' %}">Create teacher</a></td>
+            <td><a href="{% url 'groups:list' %}">List groups</a></td>
+            <td><a href="{% url 'groups:create' %}">Create group</a></td>
         </tr>
     </table>
-    <br></br>
+    <br><br>
     {% block content %}
+
+    {% endblock %}
 </body>
 </html>

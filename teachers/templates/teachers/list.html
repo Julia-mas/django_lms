@@ -1,7 +1,23 @@
-{% extends 'teachers/base.html' %}
+{% extends 'base.html' %}
 
 {% block title %}
     Teachers list
+{% endblock %}
+
+{% block custom_css %}
+table, th, td {
+  border: 1px solid black;
+  text-align: left;
+  padding: 8px;
+  border-collapse: collapse;
+}
+tr:nth-child(even) {
+  background-color: rgba(150, 212, 212, 0.4);
+}
+
+th:nth-child(even),td:nth-child(even) {
+  background-color: rgba(150, 212, 212, 0.4);
+}
 {% endblock %}
 
 {% block content %}
@@ -18,7 +34,27 @@
         <input type="number" name="phone_number"><br><br>
         <input type="submit" value="Search">
     </form>
+    <table style="width:98%">
+        <tr>
+            <th></th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Subject</th>
+            <th>Seniority years</th>
+            <th>Phone number</th>
+            <th>✐</th>
+            <th>🗑</th>
+        </tr>
     {% for teacher in teachers %}
-        <a href="update/{{ teacher.id }}/">Edit</a>&nbsp;&nbsp;{{ teacher }}<br>
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ teacher.first_name }}</td>
+            <td>{{ teacher.last_name}}</td>
+            <td>{{ teacher.subject }}</td>
+            <td>{{ teacher.seniority_years }}</td>
+            <td>{{ teacher.phone_number}}</td>
+            <td><a href="{% url 'teachers:update' teacher.id %}">Edit</a></td>&nbsp;
+            <td><a href="{% url 'teachers:delete' teacher.id %}">Delete</a></td>
+        </tr>
     {% endfor %}
 {% endblock %}

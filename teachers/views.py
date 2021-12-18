@@ -1,19 +1,14 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
-from django.urls import reverse # noqa
+from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 
 from teachers.forms import TeacherCreateForm
 from teachers.models import Teachers
-# from teachers.utils import format_records
 
 
 from webargs import fields
 from webargs.djangoparser import use_args
-
-
-def index_teachers(request):
-    return render(request, 'teachers/index.html')
 
 
 @use_args(
@@ -47,7 +42,7 @@ def create_teacher(request):
 
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/teachers/')
+            return HttpResponseRedirect(reverse('teachers:list'))
 
     return render(
         request=request,
@@ -66,7 +61,7 @@ def update_teacher(request, pk):
 
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/teachers/')
+            return HttpResponseRedirect(reverse('teachers:list'))
 
     # html_form = f"""
     #     <form method="post">
@@ -76,5 +71,14 @@ def update_teacher(request, pk):
     #     </form>
     # """
     return render(request, 'teachers/update.html', {'form': form})
+
+
+def delete_teacher(request, pk):
+    teacher = get_object_or_404(Teachers, id=pk)
+    if request.method == 'POST':
+        teacher.delete()
+        return HttpResponseRedirect(reverse('teachers:list'))
+
+    return render(request, 'teachers/delete.html', {'teacher': teacher})
 
 

@@ -1,17 +1,13 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render # noqa
+from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 
 from groups.forms import GroupCreateForm
 from groups.models import Groups
-# from groups.utils import format_records
 
 from webargs import fields
 from webargs.djangoparser import use_args
-
-
-def index_group(request):
-    return render(request, 'groups/index.html')
 
 
 @use_args(
@@ -45,7 +41,7 @@ def create_groups(request):
 
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/groups/')
+            return HttpResponseRedirect(reverse('groups:list'))
 
     return render(
         request=request,
@@ -64,6 +60,15 @@ def update_group(request, pk):
 
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/groups/')
+            return HttpResponseRedirect(reverse('groups:list'))
 
     return render(request, 'groups/update.html', {'form': form})
+
+
+def delete_group(request, pk):
+    group = get_object_or_404(Groups, id=pk)
+    if request.method == 'POST':
+        group.delete()
+        return HttpResponseRedirect(reverse('groups:list'))
+
+    return render(request, 'groups/delete.html', {'group': group})

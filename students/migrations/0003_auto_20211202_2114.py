@@ -3,7 +3,7 @@
 import datetime
 import django.core.validators
 from django.db import migrations, models
-import students.validators
+import core.validators
 
 
 class Migration(migrations.Migration):
@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='students',
             name='birthday',
-            field=models.DateField(default=datetime.date.today, validators=[students.validators.adult_validator]),
+            field=models.DateField(default=datetime.date.today, validators=[core.validators.adult_validator]),
         ),
         migrations.AlterField(
             model_name='students',

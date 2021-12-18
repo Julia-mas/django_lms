@@ -1,7 +1,23 @@
-{% extends 'groups/base.html' %}
+{% extends 'base.html' %}
 
 {% block title %}
     Groups list
+{% endblock %}
+
+{% block custom_css %}
+table, th, td {
+  border: 1px solid black;
+  text-align: left;
+  padding: 8px;
+  border-collapse: collapse;
+}
+tr:nth-child(even) {
+  background-color: rgba(150, 212, 212, 0.4);
+}
+
+th:nth-child(even),td:nth-child(even) {
+  background-color: rgba(150, 212, 212, 0.4);
+}
 {% endblock %}
 
 {% block content %}
@@ -16,7 +32,25 @@
         <input type="number" name="members_qty"></br></br>
         <input type="submit" value="Submit">
     </form>
+    <table style="width:98%">
+        <tr>
+            <th></th>
+            <th>Groups name</th>
+            <th>Groups nationality</th>
+            <th>Groups language</th>
+            <th>Members quantity</th>
+            <th>✐</th>
+            <th>🗑</th>
+        </tr>
     {% for group in groups %}
-        <a href="update/{{ group.id }}/">Edit</a>&nbsp;&nbsp;{{ group }}<br>
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ group.groups_name }}</td>
+            <td>{{ group.groups_nationality}}</td>
+            <td>{{ group.groups_language }}</td>
+            <td>{{ group.members_qty }}</td>
+            <td><a href="{% url 'groups:update' group.id %}">Edit</a></td>
+            <td><a href="{% url 'groups:delete' group.id %}">Delete</a></td>
+        </tr>
     {% endfor %}
 {% endblock %}
