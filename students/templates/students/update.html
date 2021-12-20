@@ -3,14 +3,14 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-    Update teacher
+    Update student
 {% endblock %}
 
 {% block content %}
     <form method="post">
         {% csrf_token %}
         {{ form | crispy }}
-        <input class="btn btn-outline-info" type="submit" value="Update">
-        <a class="btn btn-outline-primary" href="{% url 'teachers:list' %}">Cancel</a>
+        <input class="btn btn-outline-primary" type="submit" value="Update">
+        <a class="btn btn-outline-danger" href="{% url 'students:list' %}">Cancel</a>
     </form>
 {% endblock %}

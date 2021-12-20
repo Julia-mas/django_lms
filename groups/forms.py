@@ -1,4 +1,5 @@
 from django import forms
+from django_filters import FilterSet
 
 from .models import Groups
 
@@ -12,3 +13,12 @@ class GroupCreateForm(forms.ModelForm):
             'groups_language',
             'members_qty'
         ]
+
+
+class GroupsFilter(FilterSet):
+    class Meta:
+        model = Groups
+        fields = {
+            'members_qty': ['lt', 'gt'],
+            'groups_name': ['exact', 'startswith'],
+        }

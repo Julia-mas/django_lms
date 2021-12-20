@@ -1,22 +1,52 @@
-{% extends 'groups/base.html' %}
+{% extends 'base.html' %}
+
+{%  load crispy_forms_tags %}
 
 {% block title %}
     Groups list
 {% endblock %}
-
 {% block content %}
-    <form method="get">
-        <label for="gname">Groups name:</label>
-        <input type="text" id="gname" name="groups_name"></br></br>
-        <label for="gnat">Groups nationality:</label>
-        <input type="text" id="gnat" name="groups_nationality"></br></br>
-        <label for="language">Groups language:</label>
-        <input type="text" name="groups_language"></br></br>
-        <label for="members">Members quantity:</label>
-        <input type="number" name="members_qty"></br></br>
-        <input type="submit" value="Submit">
-    </form>
-    {% for group in groups %}
-        <a href="update/{{ group.id }}/">Edit</a>&nbsp;&nbsp;{{ group }}<br>
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button collapsed" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                        aria-expanded="true" aria-controls="collapseOne">
+                    Search
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse"
+                 aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <form method="get">
+                        {{ filter_groups.form | crispy }}
+                        <input class="btn btn-outline-success" type="submit" value="Search">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p class="mt-2"><strong>Count of groups: {{ filter_groups.qs.count }}</strong></p>
+    <table class="table table-light table-hover">
+        <tr class="table-active">>
+            <th scope="row">№</th>
+            <th>Groups name</th>
+            <th>Groups nationality</th>
+            <th>Groups language</th>
+            <th>Members quantity</th>
+            <th><i class="bi bi-pen"></i></th>
+            <th><i class="bi bi-trash-fill"></i></th>
+        </tr>
+    {% for group in filter_groups.qs %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ group.groups_name }}</td>
+            <td>{{ group.groups_nationality}}</td>
+            <td>{{ group.groups_language }}</td>
+            <td>{{ group.members_qty }}</td>
+            <td><a href="{% url 'groups:update' group.id %}">Edit</a></td>
+            <td><a href="{% url 'groups:delete' group.id %}">Delete</a></td>
+        </tr>
     {% endfor %}
+    </table>
 {% endblock %}

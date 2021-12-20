@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Create student
+Delete student
 {% endblock %}
 
 {% block content %}
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Create">
+        <p>Do you really remove {{ student.last_name }} {{ student.first_name }}?</p>
+        <input type="submit" value="Agree">
         <a href="{% url 'students:list' %}">Cancel</a>
     </form>
 {% endblock %}

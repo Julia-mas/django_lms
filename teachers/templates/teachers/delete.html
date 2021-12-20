@@ -1,16 +1,14 @@
 {% extends 'base.html' %}
 
-{% load crispy_forms_tags %}
-
 {% block title %}
-    Update teacher
+Delete teacher
 {% endblock %}
 
 {% block content %}
     <form method="post">
         {% csrf_token %}
-        {{ form | crispy }}
-        <input class="btn btn-outline-info" type="submit" value="Update">
+        <p>Do you really want to remove {{ teacher.first_name }}  {{ teacher.last_name }}?</p>
+        <input class="btn btn-outline-danger" type="submit" value="Agree">
         <a class="btn btn-outline-primary" href="{% url 'teachers:list' %}">Cancel</a>
     </form>
 {% endblock %}
