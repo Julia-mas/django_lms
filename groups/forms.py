@@ -22,3 +22,8 @@ class GroupsFilter(FilterSet):
             'members_qty': ['lt', 'gt'],
             'groups_name': ['exact', 'startswith'],
         }
+
+
+class GroupUpdateForm(GroupCreateForm):
+    class Meta(GroupCreateForm.Meta):
+        fields = '__all__'

@@ -53,7 +53,6 @@ def create_groups(request):
     )
 
 
-@csrf_exempt
 def update_group(request, pk):
     group = Groups.objects.get(id=pk)
     if request.method == 'GET':
@@ -65,7 +64,7 @@ def update_group(request, pk):
             form.save()
             return HttpResponseRedirect(reverse('groups:list'))
 
-    return render(request, 'groups/update.html', {'form': form})
+    return render(request, 'groups/update.html', {'form': form, 'group': group})
 
 
 def delete_group(request, pk):

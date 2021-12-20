@@ -13,4 +13,11 @@
         <input class="btn btn-outline-primary" type="submit" value="Update">
         <a class="btn btn-outline-danger" href="{% url 'groups:list' %}">Cancel</a>
     </form>
+    {% with list_object=group.students.all  %}
+        {% include 'includes/students_list_table.html' %}
+    {% endwith %}
+
+    {% with list_object=group.teachers.all  %}
+        {% include 'includes/teachers_list_table.html' %}
+    {% endwith %}
 {% endblock %}
