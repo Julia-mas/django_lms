@@ -9,7 +9,7 @@ class GroupCreateForm(forms.ModelForm):
         model = Groups
         fields = [
             'groups_name',
-            'groups_nationality',
+            'groups_country',
             'groups_language',
             'members_qty'
         ]

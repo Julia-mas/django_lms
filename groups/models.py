@@ -1,11 +1,12 @@
 from django.db import models
+from faker import Faker
 
 
 class Groups(models.Model):
     groups_name = models.CharField(max_length=100)
-    groups_nationality = models.CharField(max_length=100)
+    groups_country = models.CharField(max_length=100)
     groups_language = models.CharField(max_length=100)
-    members_qty = models.IntegerField()
+    members_qty = models.IntegerField(default=5)
 
     headman = models.OneToOneField(
         'students.Students',
@@ -15,5 +16,20 @@ class Groups(models.Model):
     )
 
     def __str__(self):
-        return f'{self.groups_name} {self.groups_nationality} {self.groups_language} - ' \
-               f'{self.members_qty}'
+        return f'{self.groups_name} - {self.groups_country}'
+
+    @classmethod
+    def _generate(cls):
+        f = Faker()
+        obj = cls(
+            groups_name=f.name(),
+            groups_country=f.country(),
+        )
+        obj.save()
+
+        return obj
+
+    @classmethod
+    def generate(cls, cnt):
+        for _ in range(cnt):
+            cls._generate()

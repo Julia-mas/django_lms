@@ -15,7 +15,6 @@ from webargs.djangoparser import use_args
     {
         'first_name': fields.Str(required=False),
         'last_name': fields.Str(required=False),
-        'subject': fields.Str(required=False),
         'seniority_years': fields.Int(required=False),
     },
     location='query'

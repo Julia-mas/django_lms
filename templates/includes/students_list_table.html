@@ -23,7 +23,7 @@
             <td>{{ student.enroll_date }}</td>
             <td>{{ student.graduate_date }}</td>
             <td>{% if student.group %}{{ student.group }}{% endif %}</td>
-            <td>{{ student.headman_group }}</td>
+            <td>{% if student.headman_group %}<i class="bi bi-check2-square">{% endif %}</i></td>
             <td><a href="{% url 'students:update' student.id %}">Edit</a></td>
             <td><a href="{% url 'students:delete' student.id %}">Delete</a></td>
         </tr>

@@ -39,9 +39,11 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'django_filters',
-    'students.apps.StudentsConfig',
+    'core.apps.CoreConfig',
     'groups.apps.GroupsConfig',
+    'students.apps.StudentsConfig',
     'teachers.apps.TeachersConfig',
+    'courses.apps.CoursesConfig',
     # 'students',
 ]
 INTERNAL_IPS = [
@@ -133,6 +135,8 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DURATIONFIELD_ALLOW_MONTHS = True
 
 # if DEBUG:
 #     SHELL_PLUS_PRINT_SQL = True

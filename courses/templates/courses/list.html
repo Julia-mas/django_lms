@@ -3,7 +3,7 @@
 {%  load crispy_forms_tags %}
 
 {% block title %}
-    Groups list
+    Courses list
 {% endblock %}
 {% block content %}
     <div class="accordion" id="accordionExample">
@@ -19,35 +19,35 @@
                  aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     <form method="get">
-                        {{ filter_groups.form | crispy }}
+                        {{ filter_courses.form | crispy }}
                         <input class="btn btn-outline-success" type="submit" value="Search">
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    <p class="mt-2"><strong>Count of groups: {{ filter_groups.qs.count }}</strong></p>
+    <p class="mt-2"><strong>Count of courses: {{ filter_courses.qs.count }}</strong></p>
     <table class="table table-light table-hover">
         <tr class="table-active">>
             <th scope="row">№</th>
-            <th>Groups name</th>
-            <th>Groups country</th>
-            <th>Groups language</th>
-            <th>Members quantity</th>
-            <th>Headman</th>
+            <th>Course name</th>
+            <th>Duration</th>
+            <th>Start date</th>
+            <th>Formate education</th>
+            <th>Group</th>
             <th><i class="bi bi-pen"></i></th>
             <th><i class="bi bi-trash-fill"></i></th>
         </tr>
-    {% for group in filter_groups.qs %}
+    {% for course in filter_courses.qs %}
         <tr>
             <td>{{ forloop.counter }}</td>
-            <td>{{ group.groups_name }}</td>
-            <td>{{ group.groups_country}}</td>
-            <td>{{ group.groups_language }}</td>
-            <td>{{ group.members_qty }}</td>
-            <td>{{ group.headman }}</td>
-            <td><a href="{% url 'groups:update' group.id %}">Edit</a></td>
-            <td><a href="{% url 'groups:delete' group.id %}">Delete</a></td>
+            <td>{{ course.name }}</td>
+            <td>{{ course.duration}}</td>
+            <td>{{ course.start_date }}</td>
+            <td>{{ course.format_education }}</td>
+            <td>{{course.group}}</td>
+            <td><a href="{% url 'courses:update' course.id %}">Edit</a></td>
+            <td><a href="{% url 'courses:delete' course.id %}">Delete</a></td>
         </tr>
     {% endfor %}
     </table>

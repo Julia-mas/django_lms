@@ -11,9 +11,7 @@ class TeacherCreateForm(forms.ModelForm):
         fields = [
             'first_name',
             'last_name',
-            'subject',
             'seniority_years',
-            'phone_number'
         ]
 
     def clean_phone_number(self):

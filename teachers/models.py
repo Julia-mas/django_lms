@@ -1,20 +1,19 @@
+import random
+
 from django.db import models
 
-from faker import Faker
 
+from core.models import Person
 from groups.models import Groups
 from teachers.validators import phone_number_validator
 
 
-class Teachers(models.Model):
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    subject = models.CharField(max_length=100)
-    seniority_years = models.IntegerField()
+class Teachers(Person):
+
+    seniority_years = models.IntegerField(default=5)
     phone_number = models.CharField(
         max_length=30,
         null=True,
-        blank=True,
         validators=[phone_number_validator]
     )
     group = models.ForeignKey(
@@ -24,17 +23,9 @@ class Teachers(models.Model):
         related_name='teachers'
     )
 
-    def __str__(self):
-        return f'{self.first_name} {self.last_name} {self.subject} - {self.seniority_years} - {self.phone_number}'
-
-    @staticmethod
-    def generate_teachers(cnt):
-        fa = Faker()
-        for _ in range(cnt):
-            st = Teachers(
-                first_name=fa.first_name(),
-                last_name=fa.last_name(),
-                seniority_years=fa.pyint(1, 100),
-            )
-
-            st.save()
+    @classmethod
+    def _generate(cls):
+        teacher = super()._generate()
+        teacher.seniority_years = random.randint(1, 30)
+        teacher.phone_number = random.randint(100000000, 999999999)
+        teacher.save()
