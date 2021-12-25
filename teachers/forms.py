@@ -42,3 +42,8 @@ class TeachersFilter(FilterSet):
             'first_name': ['exact', 'icontains'],
             'last_name': ['exact', 'startswith'],
         }
+
+
+class TeacherUpdateForm(TeacherCreateForm):
+    class Meta(TeacherCreateForm.Meta):
+        fields = '__all__'

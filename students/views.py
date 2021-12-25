@@ -22,11 +22,11 @@ from .forms import StudentsFilter
     location='query'
 )
 def get_students(request, args):
-    students = Students.objects.all()
+    students = Students.objects.all().select_related('group', 'headman_group')
 
-    for key, value in args.items():
-        if value:
-            students = students.filter(**{key: value})
+    # for key, value in args.items():
+    #     if value:
+    #         students = students.filter(**{key: value})
 
     # html_form = """
     #     <form method="get">

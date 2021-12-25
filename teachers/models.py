@@ -2,6 +2,7 @@ from django.db import models
 
 from faker import Faker
 
+from groups.models import Groups
 from teachers.validators import phone_number_validator
 
 
@@ -15,6 +16,12 @@ class Teachers(models.Model):
         null=True,
         blank=True,
         validators=[phone_number_validator]
+    )
+    group = models.ForeignKey(
+        Groups,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='teachers'
     )
 
     def __str__(self):

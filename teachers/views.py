@@ -56,7 +56,6 @@ def create_teacher(request):
     )
 
 
-@csrf_exempt
 def update_teacher(request, pk):
     teacher = Teachers.objects.get(id=pk)
     if request.method == 'GET':
@@ -68,13 +67,6 @@ def update_teacher(request, pk):
             form.save()
             return HttpResponseRedirect(reverse('teachers:list'))
 
-    # html_form = f"""
-    #     <form method="post">
-    #         {form.as_p()}
-    #
-    #         <input type="submit" value="Update">
-    #     </form>
-    # """
     return render(request, 'teachers/update.html', {'form': form})
 
 
