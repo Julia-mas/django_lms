@@ -15,6 +15,12 @@ class Groups(models.Model):
         related_name='headman_group'
     )
 
+    teachers = models.ManyToManyField(
+        'teachers.Teachers',
+        related_name='groups'
+
+    )
+
     def __str__(self):
         return f'{self.groups_name} - {self.groups_country}'
 

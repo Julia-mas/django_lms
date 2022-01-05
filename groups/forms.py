@@ -1,18 +1,18 @@
-from django import forms
+from django.forms import ChoiceField, ModelForm
 from django_filters import FilterSet
 
 from .models import Groups
 
 
-class GroupCreateForm(forms.ModelForm):
+class GroupBaseForm(ModelForm):
     class Meta:
         model = Groups
-        fields = [
-            'groups_name',
-            'groups_country',
-            'groups_language',
-            'members_qty'
-        ]
+        fields = '__all__'
+
+
+class GroupCreateForm(GroupBaseForm):
+    class Meta(GroupBaseForm.Meta):
+        exclude = ['headman']
 
 
 class GroupsFilter(FilterSet):
@@ -24,6 +24,14 @@ class GroupsFilter(FilterSet):
         }
 
 
-class GroupUpdateForm(GroupCreateForm):
-    class Meta(GroupCreateForm.Meta):
-        fields = '__all__'
+class GroupUpdateForm(GroupBaseForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['headman_field'] = ChoiceField(
+            choices=[(st.id, str(st)) for st in self.instance.students.all()],
+            label='Headman',
+            required=False
+        )
+
+    class Meta(GroupBaseForm.Meta):
+        exclude = ['headman']

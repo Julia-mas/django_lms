@@ -1,16 +1,16 @@
 <table class="table table-light table-hover">
-    <tr class="table-active">
-        <th scope="row">№</th>
-        <th>First name</th>
-        <th>Last name</th>
-        <th>Seniority years</th>
-        <th>Age</th>
-        <th>Birthday</th>
-        <th>Phone number</th>
-        <th>Group</th>
-        <th><i class="bi bi-pen"></i></th>
-        <th><i class="bi bi-trash-fill"></i></th>
-    </tr>
+        <tr class="table-active">
+            <th scope="row">№</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Seniority years</th>
+            <th>Age</th>
+            <th>Birthday</th>
+            <th>Phone number</th>
+            <th>Group</th>
+            <th><i class="bi bi-pen"></i></th>
+            <th><i class="bi bi-trash-fill"></i></th>
+        </tr>
     {% for teacher in list_object %}
         <tr>
             <td>{{ forloop.counter }}</td>
@@ -20,7 +20,7 @@
             <td>{{ teacher.age}}</td>
             <td>{{ teacher.birthday}}</td>
             <td>{{ teacher.phone_number}}</td>
-            <td>{{ teacher.group}}</td>
+            <td>{% if teacher.group %}{{ teacher.group }} {% endif %}</td>
             <td><a href="{% url 'teachers:update' teacher.id %}">Edit</a></td>&nbsp;
             <td><a href="{% url 'teachers:delete' teacher.id %}">Delete</a></td>
         </tr>
