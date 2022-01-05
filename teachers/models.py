@@ -4,7 +4,7 @@ from django.db import models
 
 
 from core.models import Person
-from groups.models import Groups
+# from groups.models import Groups
 from teachers.validators import phone_number_validator
 
 
@@ -16,12 +16,12 @@ class Teachers(Person):
         null=True,
         validators=[phone_number_validator]
     )
-    group = models.ForeignKey(
-        Groups,
-        on_delete=models.SET_NULL,
-        null=True,
-        related_name='teachers'
-    )
+    # group = models.ForeignKey(
+    #     Groups,
+    #     on_delete=models.SET_NULL,
+    #     null=True,
+    #     related_name='teachers'
+    # )
 
     @classmethod
     def _generate(cls):

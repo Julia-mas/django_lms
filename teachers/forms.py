@@ -8,11 +8,7 @@ from .validators import normalize_phone
 class TeacherCreateForm(forms.ModelForm):
     class Meta:
         model = Teachers
-        fields = [
-            'first_name',
-            'last_name',
-            'seniority_years',
-        ]
+        fields = '__all__'
 
     def clean_phone_number(self):
         phone_number = self.cleaned_data['phone_number']
