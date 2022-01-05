@@ -23,10 +23,10 @@ class Person(models.Model):
         default=datetime.date.today)
 
     def __str__(self):
-        return f'{self.__full_name()}{self.birthday}'
+        return f'{self.__full_name()} {self.birthday}'
 
     def __full_name(self):
-        return f'{self.first_name}{self.last_name}'
+        return f'{self.first_name} {self.last_name}'
 
     def save(self, *args, **kwargs):
         if isinstance(self.birthday, str):

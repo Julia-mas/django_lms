@@ -32,6 +32,11 @@ class GroupUpdateForm(GroupBaseForm):
             label='Headman',
             required=False
         )
+        self.fields['teachers_field'] = ChoiceField(
+            choices=[(st.id, str(st)) for st in self.instance.teachers.all()],
+            label='Teachers',
+            required=False
+        )
 
     class Meta(GroupBaseForm.Meta):
-        exclude = ['headman']
+        exclude = ['headman', 'teachers']

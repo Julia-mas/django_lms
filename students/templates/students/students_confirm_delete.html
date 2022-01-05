@@ -7,7 +7,7 @@ Delete student
 {% block content %}
     <form method="post">
         {% csrf_token %}
-        <p>Do you really remove {{ student.last_name }} {{ student.first_name }}?</p>
+        <p>Do you really remove <strong>{{ object }}</strong>?</p>
         <input type="submit" value="Agree">
         <a href="{% url 'students:list' %}">Cancel</a>
     </form>
