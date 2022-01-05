@@ -1,7 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
-from django.views.decorators.csrf import csrf_exempt
 
 from groups.forms import GroupCreateForm
 from groups.models import Groups
@@ -14,7 +13,7 @@ from webargs.djangoparser import use_args
 @use_args(
     {
         'groups_name': fields.Str(required=False),
-        'groups_nationality': fields.Str(required=False),
+        'groups_country': fields.Str(required=False),
         'groups_language': fields.Str(required=False),
         'members_qty': fields.Str(required=False)
      },
