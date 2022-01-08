@@ -35,8 +35,10 @@
             <th>Start date</th>
             <th>Formate education</th>
             <th>Group</th>
-            <th><i class="bi bi-pen"></i></th>
-            <th><i class="bi bi-trash-fill"></i></th>
+            {% if user.is_authenticated %}
+                <th><i class="bi bi-pen"></i></th>
+                <th><i class="bi bi-trash-fill"></i></th>
+            {% endif %}
         </tr>
     {% for course in filter_courses.qs %}
         <tr>
@@ -46,8 +48,10 @@
             <td>{{ course.start_date }}</td>
             <td>{{ course.format_education }}</td>
             <td>{{course.group}}</td>
-            <td><a href="{% url 'courses:update' course.id %}">Edit</a></td>
-            <td><a href="{% url 'courses:delete' course.id %}">Delete</a></td>
+            {% if user.is_authenticated %}
+                <td><a href="{% url 'courses:update' course.id %}">Edit</a></td>
+                <td><a href="{% url 'courses:delete' course.id %}">Delete</a></td>
+            {% endif %}
         </tr>
     {% endfor %}
     </table>

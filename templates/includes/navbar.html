@@ -59,7 +59,7 @@
                         <ul class="dropdown-menu" aria-labelledby="student-dropdown">
                             {% if user.is_authenticated %}
                                 <li><a class="dropdown-item"
-                                       href="#">Profile</a></li>
+                                       href="{% url 'accounts:profile' %}">Profile</a></li>
                                 <li><a class="dropdown-item"
                                        href="{% url 'password_change' %}">Change password</a></li>
                                 <li>

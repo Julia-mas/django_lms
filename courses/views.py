@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
@@ -30,6 +31,7 @@ def create_course(request):
     return render(request, 'courses/create.html', {'form': form})
 
 
+@login_required
 def update_course(request, pk):
     course = Course.objects.get(id=pk)
     if request.method == 'GET':
@@ -44,6 +46,7 @@ def update_course(request, pk):
     return render(request, 'courses/update.html', {'form': form})
 
 
+@login_required
 def delete_course(request, pk):
     course = get_object_or_404(Course, id=pk)
     if request.method == 'POST':
