@@ -19,15 +19,15 @@
                  aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     <form method="get">
-                        {{ filter_teachers.form | crispy }}
+                        {{ object_list.form | crispy }}
                         <input class="btn btn-outline-success" type="submit" value="Search">
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    <p class="mt-2"><strong>Count of teachers: {{ filter_teachers.qs.count }}</strong></p>
-    {% with list_object=filter_teachers.qs %}
+    <p class="mt-2"><strong>Count of teachers: {{ object_list.qs.count }}</strong></p>
+    {% with list_object=object_list.qs %}
         {% include 'includes/teachers_list_table.html' %}
     {% endwith %}
 {% endblock %}

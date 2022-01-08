@@ -17,7 +17,7 @@
         {% include 'includes/students_list_table.html' %}
     {% endwith %}
 
-<!--    {% with list_object=teachers %}-->
-<!--        {% include 'includes/teachers_list_table.html' %}-->
-<!--    {% endwith %}-->
+    {% with list_object=groups.teachers.all %}
+        {% include 'includes/teachers_list_table.html' %}
+    {% endwith %}
 {% endblock %}

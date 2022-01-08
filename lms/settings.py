@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'students.apps.StudentsConfig',
     'teachers.apps.TeachersConfig',
     'courses.apps.CoursesConfig',
+    'accounts.apps.AccountsConfig',
     # 'students',
 ]
 INTERNAL_IPS = [
@@ -146,3 +147,5 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 DATE_FORMAT = 'd/m/Y'
+
+EMAIL_PORT = 1025

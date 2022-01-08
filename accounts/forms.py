@@ -6,6 +6,6 @@ class AccountRegistrationForm(UserCreationForm):
         fields = [
             'username',
             'first_name',
-            'last_name'
+            'last_name',
             'email',
         ]

@@ -7,7 +7,7 @@ Delete teacher
 {% block content %}
     <form method="post">
         {% csrf_token %}
-        <p>Do you really want to remove {{ group.groups_name }}? </p>
+        <p>Do you really want to remove <strong>{{ object }}</strong>? </p>
         <input class="btn btn-outline-danger" type="submit" value="Agree">
         <a class="btn btn-outline-primary" href="{% url 'groups:list' %}">Cancel</a>
     </form>
