@@ -35,8 +35,10 @@
             <th>Groups language</th>
             <th>Members quantity</th>
             <th>Headman</th>
-            <th><i class="bi bi-pen"></i></th>
-            <th><i class="bi bi-trash-fill"></i></th>
+            {% if user.is_authenticated %}
+                <th><i class="bi bi-pen"></i></th>
+                <th><i class="bi bi-trash-fill"></i></th>
+            {% endif %}
         </tr>
     {% for group in object_list.qs %}
         <tr>
@@ -46,8 +48,10 @@
             <td>{{ group.groups_language }}</td>
             <td>{{ group.members_qty }}</td>
             <td>{{ group.headman }}</td>
-            <td><a href="{% url 'groups:update' group.id %}">Edit</a></td>
-            <td><a href="{% url 'groups:delete' group.id %}">Delete</a></td>
+            {% if user.is_authenticated %}
+                <td><a href="{% url 'groups:update' group.id %}">Edit</a></td>
+                <td><a href="{% url 'groups:delete' group.id %}">Delete</a></td>
+            {% endif %}
         </tr>
     {% endfor %}
     </table>

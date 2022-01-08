@@ -1,5 +1,6 @@
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView, ListView, CreateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from groups.forms import GroupCreateForm, GroupUpdateForm, GroupsFilter
 from groups.models import Groups
@@ -19,14 +20,14 @@ class GroupListView(ListView):
         return filter_groups
 
 
-class GroupCreateView(CreateView):
+class GroupCreateView(LoginRequiredMixin, CreateView):
     model = Groups
     form_class = GroupCreateForm
     success_url = reverse_lazy('groups:list')
     template_name = 'groups/create.html'
 
 
-class GroupUpdateView(UpdateView):
+class GroupUpdateView(LoginRequiredMixin, UpdateView):
     model = Groups
     form_class = GroupUpdateForm
     success_url = reverse_lazy('groups:list')
@@ -57,6 +58,6 @@ class GroupUpdateView(UpdateView):
         return response
 
 
-class GroupDeleteView(DeleteView):
+class GroupDeleteView(LoginRequiredMixin, DeleteView):
     model = Groups
     success_url = reverse_lazy('groups:list')
