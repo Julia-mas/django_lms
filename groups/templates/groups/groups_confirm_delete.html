@@ -5,7 +5,7 @@ Delete teacher
 {% endblock %}
 
 {% block content %}
-    <form method="post">
+    <form action="{% url 'submit' %} " method='post'>
         {% csrf_token %}
         <p>Do you really want to remove <strong>{{ object }}</strong>? </p>
         <input class="btn btn-outline-danger" type="submit" value="Agree">
