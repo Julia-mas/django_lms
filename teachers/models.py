@@ -15,6 +15,10 @@ class Teachers(Person):
         null=True,
         validators=[phone_number_validator]
     )
+    group = models.ManyToManyField(
+        'groups.Groups',
+        related_name='groups_teachers'
+    )
 
     @classmethod
     def _generate(cls):

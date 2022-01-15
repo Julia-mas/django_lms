@@ -1,6 +1,8 @@
 from django.db import models
 from faker import Faker
 
+from teachers.models import Teachers
+
 
 class Groups(models.Model):
     groups_name = models.CharField(max_length=100)
@@ -16,7 +18,7 @@ class Groups(models.Model):
     )
 
     teachers = models.ManyToManyField(
-        'teachers.Teachers',
+        to=Teachers,
         related_name='groups'
 
     )

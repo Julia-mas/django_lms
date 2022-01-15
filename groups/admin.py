@@ -29,7 +29,7 @@ class GroupAdmin(admin.ModelAdmin):
 
     fields = [
         'groups_name',
-        ('groups_country','groups_language'),
+        ('groups_country', 'groups_language'),
         'members_qty',
         'headman',
         'teachers',
