@@ -7,10 +7,14 @@
 {% endblock %}
 
 {% block content %}
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div>
+            <div class='img-circle.vert'>
+                <img class="rounded-circle p-1 m-1" width="200" height="200" src="{{ user.profile.avatar.url }}">
+            </div>
             <div class="p-3 m-3">
+                <span class="account-heading fst-italic fw-lighter fs-1">{{ user.username }}</span>
                 <h2 class="account-heading">{{ user.first_name }} {{ user.last_name }}</h2>
                 <p class="text-secondary">{{ user.email }}</p>
             </div>
