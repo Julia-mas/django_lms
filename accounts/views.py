@@ -60,7 +60,11 @@ class AccountUpdateView(ProcessFormView):
         profile = user.profile
 
         user_form = AccountUpdateForm(instance=user, data=request.POST)
-        profile_form = AccountProfileUpdateForm(instance=profile, data=request.POST)
+        profile_form = AccountProfileUpdateForm(
+            instance=profile,
+            data=request.POST,
+            files=request.FILES
+        )
 
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
